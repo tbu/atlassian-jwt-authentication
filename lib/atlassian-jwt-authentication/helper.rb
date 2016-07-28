@@ -7,7 +7,7 @@ module AtlassianJwtAuthentication
 
     # Returns the current JWT auth object if it exists
     def current_jwt_auth
-      @jwt_auth ||= session[:jwt_auth] ? JwtToken.where(id: session[:jwt_auth]).first : nil
+      @jwt_auth ||= (session.present? and session[:jwt_auth]) ? JwtToken.where(id: session[:jwt_auth]).first : nil
     end
 
     # Sets the current JWT auth object
@@ -18,7 +18,7 @@ module AtlassianJwtAuthentication
 
     # Returns the current JWT User if it exists
     def current_jwt_user
-      @jwt_user ||= session[:jwt_user] ? JwtUser.where(id: session[:jwt_user]).first : nil
+      @jwt_user ||= (session.present? and session[:jwt_user]) ? JwtUser.where(id: session[:jwt_user]).first : nil
     end
 
     # Sets the current JWT user
